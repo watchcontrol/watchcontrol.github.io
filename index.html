@@ -1,28 +1,141 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Hank Quinlan, Horrible Cop</title>
-	</head>
-	<body>
-		<nav>
-    		<ul>
-        		<li><a href="/">Home</a></li>
-	        	<li><a href="/about">About</a></li>
-        		<li><a href="/cv">CV</a></li>
-        		<li><a href="/blog">Blog</a></li>
-    		</ul>
-		</nav>
-		<div class="container">
-    		<div class="blurb">
-        		<h1>Hi there, I'm Hank Quinlan!</h1>
-				<p>I'm best known as the horrible cop from <em>A Touch of Evil</em> Don't trust me. <a href="/about">Read more about my life...</a></p>
-    		</div><!-- /.blurb -->
-		</div><!-- /.container -->
-		<footer>
-    		<ul>
-        		<li><a href="mailto:hankquinlanhub@gmail.com">email</a></li>
-        		<li><a href="https://github.com/hankquinlan">github.com/hankquinlan</a></li>
-			</ul>
-		</footer>
-	</body>
+
+<style>
+
+button{
+	background-color: black;
+	border: none;
+	color: white;
+	width: 108px;
+	height: 77px;
+	font-size: 20px;
+	border-radius: 4px;
+}
+button:hover{
+	width: 130px;
+	height: 92px;
+}
+body{
+	text-align: center;
+	background-image: radial-gradient(black, white);  background-position: 50% 50%;
+  	background-repeat: repeat;
+}
+div{
+	/*display: inline;*/
+	margin-left: 25%;
+	width: 260px;
+	float: left;
+}
+#fnsh{
+	font-size: 25px;
+	width: 300px;
+	height: 100px;
+}
+#fnsh:hover{
+	font-size: 40px;
+	background-color: orange;
+	color: black;
+	text-shadow: 4px 4px 8px white, 0 0 25px white, 0 0 10px white;
+}
+</style>
+
+<head>
+<title>Scripts, executables</title>
+</head>
+<body>
+<h1>Kwizz!<h1>
+<div>
+<p id="Apar">Team A: 0</p>
+<button onClick="incA()" style="background-color: lime">Correct</button>
+<button onClick="decA()"style="background-color: red">Incorrect</button>
+</div>
+<div>
+<p id="Bpar">Team B: 0</p>
+<button onClick="incB()"style="background-color: lime">Correct</button>
+<button onClick="decB()"style="background-color: red">Incorrect</button>
+</div>
+<br></br><br></br><br></br><br></br>
+<button onClick="win()" id="fnsh">Finish quiz</button>
+<p id="winp"></p>
+</body>
+<script>
+
+var scoreA = 0;
+var scoreB = 0;
+var Apar = document.getElementById("Apar");
+var Bpar = document.getElementById("Bpar");
+var winp = document.getElementById("winp");
+
+function incA(){
+	scoreA += 1;
+	UpdateScore();
+}
+
+function incB(){
+	scoreB += 1;
+	UpdateScore();
+}
+
+function decA(){
+	scoreA -= 1;
+	UpdateScore();
+}
+
+function decB(){
+	scoreB -=1;
+	UpdateScore();
+}
+
+function win(){
+	var bod = document.body;
+	if (scoreA == scoreB){
+		Apar.innerHTML = "Draw";
+		Bpar.innerHTML = "Draw";
+	}
+	else{
+		bod.style.backgroundImage = "url(../index/winner.gif)";
+		if (scoreA > scoreB){
+			winp.innerHTML = "Winner: Team A";
+		}
+		else{
+			winp.innerHTML = "Winner: Team B";
+		}
+		winp.style.color = "red";
+		winp.style.fontSize = "60px";
+	}
+	colr();
+}
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function colr(){
+	while (true){
+		winp.style.color = "rgb(255,140,0)";
+		await sleep(100);
+		winp.style.color = "black";
+		await sleep(100);
+	}
+}
+
+function UpdateScore(){
+	Apar.innerHTML = "Team A: " + scoreA;
+	Bpar.innerHTML = "Team B: " + scoreB;
+	if (scoreA > scoreB){
+		Apar.style.color = "lime";
+		Bpar.style.color = "black";
+	}
+	else if (scoreA < scoreB){
+		Apar.style.color = "black";
+		Bpar.style.color = "lime";
+	}
+	else{
+		Apar.style.color = "black";
+		Bpar.style.color = "black";
+	}
+		
+}
+</script>
 </html>
